@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="version.css">
+  <link rel="icon" type="image/png" href="/somewhere/myicon.png" />
+  
+  <title>drum-player</title>
+</head>
+
+<body>
+  <div class="keys">
+    <img src="./new_drum.gif" alt="">
+  </div>
+
+  <div class="main">
+    
+    <div data-key="65" class="key" onclick=clickPlay(65)>
+      <kbd>A</kbd>
+    </div>
+    <div data-key="83" class="key" onclick=clickPlay(83)>
+      <kbd>S</kbd>
+    </div>
+    <div data-key="68" class="key" onclick=clickPlay(68)>
+      <kbd>D</kbd>
+    </div>
+    <div data-key="70" class="key" onclick=clickPlay(70)>
+      <kbd>F</kbd>
+    </div>
+    <div data-key="71" class="key" onclick=clickPlay(71)>
+      <kbd>G</kbd>
+    </div>
+
+    <div data-key="72" class="key" onclick=clickPlay(72)>
+      <kbd>H</kbd>
+    </div>
+    <div data-key="74" class="key" onclick=clickPlay(74)>
+      <kbd>J</kbd>
+
+    </div>
+    <div data-key="75" class="key" onclick=clickPlay(75)>
+      <kbd>K</kbd>
+    </div>
+    <div data-key="76" class="key" onclick=clickPlay(76)>
+      <kbd>L</kbd>
+    </div>
+  </div>
+
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+   
+  <script>
+
+    function play(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
+      const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+      if (!audio)
+        return;
+
+      key.classList.add('playing');
+      audio.currentTime = 0;
+      audio.play();
+      
+      setTimeout(function(){
+        key.classList.remove('playing');
+      },250);
+    }
+
+    
+    function clickPlay(id){
+      
+        const audio = document.querySelector(`audio[data-key="${id}"`);
+        const key = document.querySelector(`div[data-key="${id}"]`);
+      key.classList.add('playing');
+      audio.currentTime = 0;
+      audio.play();
+      
+      setTimeout(function(){
+        key.classList.remove('playing');
+      },250);
+
+    }
+    
+
+    window.addEventListener('keydown', play);
+    
+
+  </script>
+</body>
+
+</html>
